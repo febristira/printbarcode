@@ -1,167 +1,361 @@
-﻿<!doctype html>
+﻿
+<!doctype html>
 <html lang="id">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Barcode Label 30 × 15 mm</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+
   <style>
-    
-:root {
-  --label-w: 30mm;
-  --label-h: 15mm;
-  --gap-x: 4mm;
-  --side-margin: 0mm;
-}
+    :root {
+      --label-w: 30mm;
+      --label-h: 15mm;
+      --gap-x: 2mm;
+      --side-margin: 1.3mm;
+    }
 
-* {
-  box-sizing: border-box;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-.sheet {
-  width: 105.6mm;
-  margin: 0;
-  padding: 0 var(--side-margin);
-}
+    body {
+      margin: 0;
+    }
 
-.labels {
-  display: grid;
-  grid-template-columns: repeat(3, var(--label-w));
-  column-gap: var(--gap-x);
-  row-gap: 0;
-  justify-content: start;
-}
+    .sheet {
+      width: 105.6mm;
+      margin: 0;
+      padding: 0 var(--side-margin);
+    }
 
-.label {
-  width: 30mm;
-  height: 15mm;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0.6mm 1mm 0.4mm;
-  break-inside: avoid;
-  page-break-inside: avoid;
-}
+    .labels {
+      display: grid;
+      grid-template-columns: repeat(3, var(--label-w));
+      column-gap: var(--gap-x);
+      row-gap: 0;
+      justify-content: start;
+    }
 
-@page {
-  size: 105.6mm 15mm;
-  margin: 0;
-}
+    .label {
+      width: var(--label-w);
+      height: var(--label-h);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6mm 1mm 0.4mm;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
 
-@media print {
-  html,
-  body {
-    width: 105.6mm;
-    height: 15mm;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
+    .barcode {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      max-height: 10mm;
+    }
 
-  body > div {
-    min-height: 0 !important;
-    padding: 0 !important;
-  }
+    .value {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 7pt;
+      line-height: 1.1;
+      color: #000;
+    }
 
-  .controls,
-  .print\:hidden {
-    display: none !important;
-  }
+    @page {
+      size: 105.6mm 15mm;
+      margin: 0;
+    }
 
-  .sheet {
-    width: 105.6mm;
-    height: 15mm;
-    margin: 0;
-    padding: 0 1.3mm;
-  }
+    @media print {
+      html,
+      body {
+        width: 105.6mm;
+        height: 15mm;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
 
-  .labels {
-    width: max-content;
-    grid-template-columns: repeat(3, 30mm);
-    column-gap: 2mm;
-    row-gap: 0;
-  }
+      body > div {
+        min-height: 0 !important;
+        padding: 0 !important;
+      }
 
-  .label {
-    width: 30mm;
-    height: 15mm;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-}
+      .controls,
+      .print\:hidden {
+        display: none !important;
+      }
 
+      .sheet {
+        width: 105.6mm;
+        height: 15mm;
+        margin: 0;
+        padding: 0 var(--side-margin);
+      }
+
+      .labels {
+        width: max-content;
+        grid-template-columns: repeat(3, var(--label-w));
+        column-gap: var(--gap-x);
+        row-gap: 0;
+      }
+
+      .label {
+        width: var(--label-w);
+        height: var(--label-h);
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
   </style>
 </head>
 
 <body>
   <div class="min-h-screen bg-slate-950 px-4 py-8 text-slate-900 print:bg-white print:p-0">
+
     <section class="controls mx-auto mb-8 max-w-5xl">
       <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <div
-            class="mb-3 inline-flex items-center gap-2 rounded-full border border-indigo-400/20 bg-indigo-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-indigo-300">
-            <span class="h-2 w-2 rounded-full bg-emerald-400"></span> Label Studio</div>
-          <h1 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Barcode Label <span
-              class="text-indigo-400">30 × 15 mm</span></h1>
-          <p class="mt-2 max-w-2xl text-sm text-slate-400">Buat label barcode siap cetak dengan susunan 3 kolom. Satu
-            kode per baris.</p>
+          <div class="mb-3 inline-flex items-center gap-2 rounded-full border border-indigo-400/20 bg-indigo-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-indigo-300">
+            <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+            Label Studio
+          </div>
+
+          <h1 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Barcode Label <span class="text-indigo-400">30 × 15 mm</span>
+          </h1>
+
+          <p class="mt-2 max-w-2xl text-sm text-slate-400">
+            Buat label barcode siap cetak dengan susunan 3 kolom.
+            Satu kode per label.
+          </p>
         </div>
+
         <div class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-right text-xs text-slate-400">
-          <div class="font-semibold text-white">Kertas 100 × 150 mm</div>
-          <div>Margin samping 1,3 mm · Gap 2 mm</div>
+          <div class="font-semibold text-white">Kertas 105,6 × 15 mm</div>
+          <div id="sheetInfo">Margin 1,3 mm · Gap 2 mm</div>
         </div>
       </div>
-      <div
-        class="grid gap-5 rounded-3xl border border-white/10 bg-white p-5 shadow-2xl shadow-indigo-950/30 sm:p-6 lg:grid-cols-[1.25fr_.75fr]">
-        <div><label for="codes" class="mb-2 block text-sm font-semibold text-slate-700">Daftar kode</label><textarea
+
+      <div class="grid gap-5 rounded-3xl border border-white/10 bg-white p-5 shadow-2xl shadow-indigo-950/30 sm:p-6 lg:grid-cols-[1.25fr_.75fr]">
+
+        <div>
+          <label for="codes" class="mb-2 block text-sm font-semibold text-slate-700">
+            Daftar kode
+          </label>
+
+          <textarea
             id="codes"
             class="min-h-44 w-full resize-y rounded-2xl border border-slate-200 bg-slate-50 p-4 font-mono text-sm text-slate-700 outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
-            spellcheck="false" placeholder="Satu kode per baris">8991234567890
+            spellcheck="false"
+            placeholder="Satu kode per baris"
+          >8991234567890
 BRG-0002
 BRG-0003
 BRG-0004
 BRG-0005
 BRG-0006</textarea>
-          <p class="mt-2 text-xs text-slate-400">Tip: tempel kode dalam jumlah banyak, setiap kode dipisahkan dengan
-            baris baru.</p>
+
+          <p class="mt-2 text-xs text-slate-400">
+            Tempel banyak kode sekaligus. Pisahkan setiap kode dengan baris baru.
+          </p>
         </div>
+
         <div class="flex flex-col justify-between gap-5">
           <div class="space-y-4">
-            <div><label for="format" class="mb-2 block text-sm font-semibold text-slate-700">Format
-                barcode</label><select id="format"
-                class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-700 outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10">
+
+            <div>
+              <label for="format" class="mb-2 block text-sm font-semibold text-slate-700">
+                Format barcode
+              </label>
+
+              <select
+                id="format"
+                class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-700 outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
+              >
                 <option value="CODE128">Code 128 (umum)</option>
                 <option value="EAN13">EAN-13 (13 digit)</option>
                 <option value="CODE39">Code 39</option>
-              </select></div><label class="flex cursor-pointer items-center gap-3 text-sm text-slate-600"><input
-                type="checkbox" id="showText" checked
-                class="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"> Tampilkan kode di bawah
-              barcode</label>
+              </select>
+            </div>
+
+            <!-- Pengaturan jarak horizontal -->
+            <div>
+              <label for="gapX" class="mb-2 block text-sm font-semibold text-slate-700">
+                Gap horizontal antarbarcode (mm)
+              </label>
+
+              <input
+                type="number"
+                id="gapX"
+                value="2"
+                min="0"
+                max="10"
+                step="0.1"
+                class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-700 outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
+              >
+
+              <p class="mt-1 text-xs text-slate-400">
+                Contoh: 0 mm tanpa jarak, 2 mm jarak standar, 3 mm lebih renggang.
+              </p>
+            </div>
+
+            <label class="flex cursor-pointer items-center gap-3 text-sm text-slate-600">
+              <input
+                type="checkbox"
+                id="showText"
+                checked
+                class="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+              >
+              Tampilkan kode di bawah barcode
+            </label>
+
           </div>
-          <div class="flex flex-wrap gap-3"><button id="generate"
-              class="flex-1 rounded-xl bg-indigo-600 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-500 active:scale-[.98]">Buat
-              label</button><button id="print"
-              class="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:border-indigo-300 hover:text-indigo-600 active:scale-[.98]">Cetak</button>
-          </div><span id="status" role="status" class="text-xs font-medium text-slate-400"></span>
+
+          <div class="flex flex-wrap gap-3">
+            <button
+              id="generate"
+              class="flex-1 rounded-xl bg-indigo-600 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-500 active:scale-[.98]"
+            >
+              Buat label
+            </button>
+
+            <button
+              id="print"
+              class="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:border-indigo-300 hover:text-indigo-600 active:scale-[.98]"
+            >
+              Cetak
+            </button>
+          </div>
+
+          <span id="status" role="status" class="text-xs font-medium text-slate-400"></span>
         </div>
       </div>
     </section>
+
     <main class="sheet">
-      <div class="mb-3 flex items-center justify-between px-1 text-xs text-slate-400 print:hidden"><span>Preview
-          cetak</span><span>Ukuran aktual 100 × 150 mm</span></div>
+      <div class="mb-3 flex items-center justify-between px-1 text-xs text-slate-400 print:hidden">
+        <span>Preview cetak</span>
+        <span>Ukuran label 30 × 15 mm</span>
+      </div>
+
       <div class="rounded-2xl bg-white p-2 shadow-2xl shadow-black/20 print:rounded-none print:p-0 print:shadow-none">
         <div class="labels" id="labels"></div>
       </div>
     </main>
   </div>
+
   <script>
     (() => {
-      const codesEl = document.getElementById('codes'), formatEl = document.getElementById('format'), showTextEl = document.getElementById('showText'), labelsEl = document.getElementById('labels'), statusEl = document.getElementById('status');
-      function generate() { if (typeof JsBarcode === 'undefined') { statusEl.textContent = 'Library barcode belum termuat. Pastikan internet aktif, lalu refresh.'; return; } const codes = codesEl.value.split(/\r?\n/).map(v => v.trim()).filter(Boolean); labelsEl.replaceChildren(); let errors = 0; codes.forEach(code => { const label = document.createElement('div'); label.className = 'label'; const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); svg.classList.add('barcode'); label.appendChild(svg); const value = document.createElement('div'); value.className = 'value'; value.textContent = showTextEl.checked ? code : ''; label.appendChild(value); try { JsBarcode(svg, code, { format: formatEl.value, displayValue: false, margin: 0, width: 1.15, height: 34, background: '#ffffff', lineColor: '#000000', valid: valid => { if (!valid) errors++; } }) } catch (e) { errors++; svg.remove(); value.textContent = code + ' — KODE TIDAK VALID'; } labelsEl.appendChild(label); }); statusEl.textContent = `${codes.length} label dibuat${errors ? ` · ${errors} kode perlu dicek` : ''}.`; }
-      document.getElementById('generate').addEventListener('click', generate); document.getElementById('print').addEventListener('click', () => { generate(); window.print() }); generate();
+      const codesEl = document.getElementById('codes');
+      const formatEl = document.getElementById('format');
+      const showTextEl = document.getElementById('showText');
+      const gapXEl = document.getElementById('gapX');
+      const labelsEl = document.getElementById('labels');
+      const statusEl = document.getElementById('status');
+      const sheetInfoEl = document.getElementById('sheetInfo');
+
+      function generate() {
+        if (typeof JsBarcode === 'undefined') {
+          statusEl.textContent =
+            'Library barcode belum termuat. Periksa koneksi internet lalu refresh.';
+          return false;
+        }
+
+        const rawGap = Number(gapXEl.value);
+
+        if (gapXEl.value.trim() === '' || !Number.isFinite(rawGap)) {
+          statusEl.textContent = 'Masukkan nilai Gap X yang valid.';
+          return false;
+        }
+
+        const gapX = Math.max(0, Math.min(10, rawGap));
+
+        gapXEl.value = gapX;
+
+        document.documentElement.style.setProperty('--gap-x', `${gapX}mm`);
+
+        sheetInfoEl.textContent =
+          `Margin 1,3 mm · Gap ${gapX} mm`;
+
+        const codes = codesEl.value
+          .split(/\r?\n/)
+          .map(value => value.trim())
+          .filter(Boolean);
+
+        labelsEl.replaceChildren();
+
+        let errors = 0;
+
+        codes.forEach(code => {
+          const label = document.createElement('div');
+          label.className = 'label';
+
+          const svg = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'svg'
+          );
+
+          svg.classList.add('barcode');
+
+          const value = document.createElement('div');
+          value.className = 'value';
+          value.textContent = showTextEl.checked ? code : '';
+
+          label.appendChild(svg);
+          label.appendChild(value);
+          labelsEl.appendChild(label);
+
+          try {
+            JsBarcode(svg, code, {
+              format: formatEl.value,
+              displayValue: false,
+              margin: 0,
+              width: 1.15,
+              height: showTextEl.checked ? 30 : 36,
+              background: '#ffffff',
+              lineColor: '#000000'
+            });
+          } catch (error) {
+            errors++;
+            svg.remove();
+            value.textContent = `${code} — KODE TIDAK VALID`;
+          }
+        });
+
+        statusEl.textContent =
+          `${codes.length} label dibuat` +
+          (errors ? ` · ${errors} kode perlu dicek` : '') +
+          '.';
+
+        return true;
+      }
+
+      document.getElementById('generate')
+        .addEventListener('click', generate);
+
+      document.getElementById('print')
+        .addEventListener('click', () => {
+          if (generate()) {
+            window.print();
+          }
+        });
+
+      // Regenerasi preview ketika pengaturan berubah.
+      gapXEl.addEventListener('change', generate);
+      formatEl.addEventListener('change', generate);
+      showTextEl.addEventListener('change', generate);
+
+      generate();
     })();
   </script>
 </body>
