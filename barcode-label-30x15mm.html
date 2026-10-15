@@ -8,85 +8,91 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
   <style>
-    :root {
-      --label-w: 30mm;
-      --label-h: 15mm;
-      --gap-x: 2mm;
-      --side-margin: 1.3mm;
-    }
+    
+:root {
+  --label-w: 30mm;
+  --label-h: 15mm;
+  --gap-x: 2mm;
+  --side-margin: 1.3mm;
+}
 
-    * {
-      box-sizing: border-box;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    .sheet {
-      width: 100mm;
-      margin: 0 auto;
-      padding: 0 var(--side-margin);
-    }
+.sheet {
+  width: 105.6mm;
+  margin: 0;
+  padding: 0 var(--side-margin);
+}
 
-    .labels {
-      display: grid;
-      grid-template-columns: repeat(3, var(--label-w));
-      column-gap: var(--gap-x);
-      row-gap: 0;
-      justify-content: start;
-    }
+.labels {
+  display: grid;
+  grid-template-columns: repeat(3, var(--label-w));
+  column-gap: var(--gap-x);
+  row-gap: 0;
+  justify-content: start;
+}
 
-    .label {
-      width: var(--label-w);
-      height: var(--label-h);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: .6mm 1mm .4mm;
-      break-inside: avoid;
-      page-break-inside: avoid;
-    }
+.label {
+  width: 30mm;
+  height: 15mm;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6mm 1mm 0.4mm;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
 
-    .barcode {
-      display: block;
-      width: 27mm;
-      height: 9mm;
-    }
+@page {
+  size: 105.6mm 15mm;
+  margin: 0;
+}
 
-    .value {
-      width: 100%;
-      text-align: center;
-      font: 7pt/1 Arial, sans-serif;
-      margin-top: .3mm;
-      overflow: hidden;
-      white-space: nowrap;
-    }
+@media print {
+  html,
+  body {
+    width: 105.6mm;
+    height: 15mm;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 
-    @page {
-      size: 105.6mm 15mm;
-      margin: 0;
-    }
+  body > div {
+    min-height: 0 !important;
+    padding: 0 !important;
+  }
 
-    @media print {
-      body {
-        margin: 0;
-      }
+  .controls,
+  .print\:hidden {
+    display: none !important;
+  }
 
-      .controls,
-      .print\:hidden {
-        display: none !important;
-      }
+  .sheet {
+    width: 105.6mm;
+    height: 15mm;
+    margin: 0;
+    padding: 0 1.3mm;
+  }
 
-      .sheet {
-        width: 105.6mm;
-        margin: 0;
-        padding: 0 var(--side-margin);
-      }
+  .labels {
+    width: max-content;
+    grid-template-columns: repeat(3, 30mm);
+    column-gap: 2mm;
+    row-gap: 0;
+  }
 
-      .label {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
-    }
+  .label {
+    width: 30mm;
+    height: 15mm;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
   </style>
 </head>
 
