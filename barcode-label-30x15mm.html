@@ -32,6 +32,11 @@
       padding: 0 var(--side-margin);
     }
 
+    .preview-frame {
+      display: flex;
+      justify-content: center;
+    }
+
     .labels {
       display: grid;
       grid-template-columns: repeat(3, var(--label-w));
@@ -248,8 +253,10 @@ BRG-0006</textarea>
         <span>Ukuran label 30 × 15 mm</span>
       </div>
 
-      <div class="rounded-2xl bg-white p-2 shadow-2xl shadow-black/20 print:rounded-none print:p-0 print:shadow-none">
-        <div class="labels" id="labels"></div>
+      <div class="preview-frame">
+        <div class="rounded-2xl bg-white p-2 shadow-2xl shadow-black/20 print:rounded-none print:p-0 print:shadow-none">
+          <div class="labels" id="labels"></div>
+        </div>
       </div>
     </main>
   </div>
@@ -351,6 +358,7 @@ BRG-0006</textarea>
         });
 
       // Regenerasi preview ketika pengaturan berubah.
+      gapXEl.addEventListener('input', generate);
       gapXEl.addEventListener('change', generate);
       formatEl.addEventListener('change', generate);
       showTextEl.addEventListener('change', generate);
